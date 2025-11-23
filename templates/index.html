@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Taxi Simulation - Control Center</title>
+    <link rel="stylesheet" href="/static/css/blueprint.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="blueprint-bg">
+    <div class="app-container">
+        <!-- Top Toolbar -->
+        <div class="top-toolbar">
+            <div class="toolbar-section">
+                <div class="app-title">Autonomous Taxi Simulation</div>
+            </div>
+            <div class="toolbar-section">
+                <div class="dropdown" id="fileMenu">
+                    <button class="blueprint-btn">File</button>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item" onclick="loadMap()">Load Map</div>
+                        <div class="dropdown-item" onclick="saveMap()">Save Map</div>
+                        <div class="dropdown-item" onclick="exportData()">Export Data</div>
+                    </div>
+                </div>
+                <div class="dropdown" id="viewMenu">
+                    <button class="blueprint-btn">View</button>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item" onclick="resetView()">Reset View</div>
+                        <div class="dropdown-item" onclick="fitToScreen()">Fit to Screen</div>
+                        <div class="dropdown-item" onclick="toggleGrid()">Toggle Grid</div>
+                    </div>
+                </div>
+                <button class="blueprint-btn" onclick="window.location.href='/editor'">Map Editor</button>
+                <button class="blueprint-btn" onclick="window.location.href='/simulation'">Simulation View</button>
+                <div class="dropdown" id="helpMenu">
+                    <button class="blueprint-btn">Help</button>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item" onclick="showInstructions()">Instructions</div>
+                        <div class="dropdown-item" onclick="showAbout()">About</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Sidebar - Controls -->
+            <div class="sidebar">
+                <!-- Map Info Section -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Map Information</div>
+                        </div>
+                        <div class="info-grid mt-md">
+                            <div class="info-card">
+                                <div class="info-card-label">Map Name</div>
+                                <div class="info-card-value" id="mapName">-</div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-label">Size (px)</div>
+                                <div class="info-card-value" id="mapSize">-</div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-label">Zones</div>
+                                <div class="info-card-value" id="zoneCount">0</div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-label">Roads</div>
+                                <div class="info-card-value" id="roadCount">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulation Controls -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Simulation Control</div>
+                        </div>
+                        <div class="control-panel mt-md">
+                            <div class="button-group">
+                                <button class="blueprint-btn success" id="startBtn" onclick="startSimulation()">Start</button>
+                                <button class="blueprint-btn warning" id="pauseBtn" onclick="pauseSimulation()">Pause</button>
+                                <button class="blueprint-btn danger" id="resetBtn" onclick="resetSimulation()">Reset</button>
+                            </div>
+
+                            <div class="blueprint-divider"></div>
+
+                            <div class="control-group">
+                                <label class="blueprint-label">Simulation Speed</label>
+                                <div class="control-row">
+                                    <div class="slider-container">
+                                        <input type="range" class="blueprint-slider" id="speedSlider"
+                                               min="0.1" max="5" step="0.1" value="1.0"
+                                               oninput="updateSpeed(this.value)">
+                                        <div class="slider-labels">
+                                            <span>0.1x</span>
+                                            <span>5.0x</span>
+                                        </div>
+                                    </div>
+                                    <span class="slider-value" id="speedValue">1.0x</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="blueprint-label">Traffic Density</label>
+                                <div class="control-row">
+                                    <div class="slider-container">
+                                        <input type="range" class="blueprint-slider" id="densitySlider"
+                                               min="0" max="1" step="0.01" value="0.5"
+                                               oninput="updateDensity(this.value)">
+                                        <div class="slider-labels">
+                                            <span>Low</span>
+                                            <span>High</span>
+                                        </div>
+                                    </div>
+                                    <span class="slider-value" id="densityValue">50%</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="blueprint-label">Traffic Temperature</label>
+                                <div class="control-row">
+                                    <div class="slider-container">
+                                        <input type="range" class="blueprint-slider" id="temperatureSlider"
+                                               min="0" max="1" step="0.01" value="0.5"
+                                               oninput="updateTemperature(this.value)">
+                                        <div class="slider-labels">
+                                            <span>Calm</span>
+                                            <span>Aggressive</span>
+                                        </div>
+                                    </div>
+                                    <span class="slider-value" id="temperatureValue">50%</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="blueprint-label">Pedestrian Density</label>
+                                <div class="control-row">
+                                    <div class="slider-container">
+                                        <input type="range" class="blueprint-slider" id="pedestrianSlider"
+                                               min="0" max="1" step="0.01" value="0.3"
+                                               oninput="updatePedestrianDensity(this.value)">
+                                        <div class="slider-labels">
+                                            <span>None</span>
+                                            <span>Crowded</span>
+                                        </div>
+                                    </div>
+                                    <span class="slider-value" id="pedestrianValue">30%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layer Toggles -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Layer Visibility</div>
+                        </div>
+                        <ul class="layer-list mt-md">
+                            <li class="layer-item active">
+                                <span class="layer-name">Zones</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" checked onchange="toggleLayer('zones', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li class="layer-item active">
+                                <span class="layer-name">Roads</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" checked onchange="toggleLayer('roads', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li class="layer-item active">
+                                <span class="layer-name">Vehicles</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" checked onchange="toggleLayer('vehicles', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li class="layer-item active">
+                                <span class="layer-name">Pedestrians</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" checked onchange="toggleLayer('pedestrians', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li class="layer-item">
+                                <span class="layer-name">Sensors</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" onchange="toggleLayer('sensors', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li class="layer-item">
+                                <span class="layer-name">Speed Limits</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" onchange="toggleLayer('speedLimits', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li class="layer-item">
+                                <span class="layer-name">Vehicle Paths</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" onchange="toggleLayer('paths', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Statistics</div>
+                        </div>
+                        <div class="mt-md">
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">FPS:</span>
+                                <span class="blueprint-stat-value" id="fpsCounter">60</span>
+                            </div>
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Vehicles:</span>
+                                <span class="blueprint-stat-value" id="vehicleCount">0</span>
+                            </div>
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Pedestrians:</span>
+                                <span class="blueprint-stat-value" id="pedestrianCount">0</span>
+                            </div>
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Sim Time:</span>
+                                <span class="blueprint-stat-value" id="simTime">00:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas Area -->
+            <div class="canvas-area">
+                <canvas id="map-canvas"></canvas>
+
+                <!-- Zoom Controls -->
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="zoomIn()">+</button>
+                    <div class="zoom-level" id="zoomLevel">100%</div>
+                    <button class="zoom-btn" onclick="zoomOut()">-</button>
+                    <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">⊙</button>
+                </div>
+
+                <!-- Technical Grid Overlay -->
+                <div class="technical-grid"></div>
+            </div>
+
+            <!-- Right Sidebar - Main Car Info -->
+            <div class="sidebar right">
+                <!-- Main Car Info -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Main Vehicle Status</div>
+                        </div>
+                        <div class="mt-md">
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Position X:</span>
+                                <span class="blueprint-stat-value" id="carPosX">-</span>
+                            </div>
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Position Y:</span>
+                                <span class="blueprint-stat-value" id="carPosY">-</span>
+                            </div>
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Speed:</span>
+                                <span class="blueprint-stat-value" id="carSpeed">0 km/h</span>
+                            </div>
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Current Zone:</span>
+                                <span class="blueprint-stat-value" id="carZone">-</span>
+                            </div>
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Route Progress:</span>
+                                <span class="blueprint-stat-value" id="routeProgress">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car Placement -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Car Placement</div>
+                        </div>
+                        <div class="control-panel mt-md">
+                            <button class="blueprint-btn primary" onclick="enableCarPlacement()">Place Main Car</button>
+                            <button class="blueprint-btn primary mt-sm" onclick="enableDestinationSet()">Set Destination</button>
+                            <button class="blueprint-btn mt-sm" onclick="enableWaypointMode()">Add Waypoints</button>
+                            <div class="blueprint-divider"></div>
+                            <button class="blueprint-btn danger" onclick="clearRoute()">Clear Route</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Population Control -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Population Control</div>
+                        </div>
+                        <div class="control-panel mt-md">
+                            <div class="button-group">
+                                <button class="blueprint-btn success" onclick="addVehicle()">+ Car</button>
+                                <button class="blueprint-btn danger" onclick="removeVehicle()">- Car</button>
+                            </div>
+                            <div class="button-group mt-sm">
+                                <button class="blueprint-btn success" onclick="addPedestrian()">+ Pedestrian</button>
+                                <button class="blueprint-btn danger" onclick="removePedestrian()">- Pedestrian</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sensor Visualization -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Sensor Data</div>
+                        </div>
+                        <div class="mt-md">
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Lidar Range:</span>
+                                <span class="blueprint-stat-value" id="lidarRange">-</span>
+                            </div>
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Camera Status:</span>
+                                <span class="blueprint-stat-value" id="cameraStatus">-</span>
+                            </div>
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">Radar Objects:</span>
+                                <span class="blueprint-stat-value" id="radarObjects">0</span>
+                            </div>
+                            <div class="blueprint-stat">
+                                <span class="blueprint-stat-label">GPS Accuracy:</span>
+                                <span class="blueprint-stat-value" id="gpsAccuracy">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Status Bar -->
+        <div class="status-bar">
+            <div class="status-section">
+                <div class="status-item">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span id="statusText">Ready</span>
+                </div>
+                <div class="status-item">
+                    <span>Mode:</span>
+                    <span id="modeText">Viewing</span>
+                </div>
+            </div>
+            <div class="status-section">
+                <div class="status-item">
+                    <span>Mouse:</span>
+                    <span id="mousePos">0, 0</span>
+                </div>
+                <div class="status-item">
+                    <span>Zoom:</span>
+                    <span id="zoomStatus">100%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Map Modal -->
+    <div class="modal-overlay" id="loadMapModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Load Map</div>
+            </div>
+            <div class="modal-body">
+                <div id="mapList" class="blueprint-panel">
+                    <p class="text-center">Loading available maps...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="blueprint-btn" onclick="closeModal('loadMapModal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="/static/js/map_viewer.js"></script>
+    <script src="/static/js/animation.js"></script>
+    <script src="/static/js/controls.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

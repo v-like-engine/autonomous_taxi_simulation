@@ -1,0 +1,49 @@
+# Autonomous Taxi Simulation - Python Dependencies
+
+# Core Dependencies
+numpy>=1.21.0
+scipy>=1.7.0
+pillow>=9.0.0
+
+# Computer Vision and Image Processing (Agent 1 - Map Parsing)
+opencv-python>=4.5.0
+scikit-image>=0.19.0
+
+# Web Framework (Agent 3 - Frontend)
+flask>=2.0.0
+flask-cors>=3.0.10
+flask-socketio>=5.1.0
+python-socketio>=5.4.0
+
+# Deep Learning (Agent 5 - RL Agent)
+torch>=1.9.0
+torchvision>=0.10.0
+
+# Testing Framework
+pytest>=7.0.0
+pytest-cov>=3.0.0
+pytest-mock>=3.6.0
+pytest-asyncio>=0.18.0
+
+# Development Tools
+black>=22.0.0
+flake8>=4.0.0
+mypy>=0.950
+
+# Utilities
+pyyaml>=6.0
+python-dotenv>=0.19.0
+tqdm>=4.62.0
+
+# Data Structures and Algorithms
+networkx>=2.6.0  # For road network graph
+
+# Optional but useful
+matplotlib>=3.5.0  # For visualization and plotting
+seaborn>=0.11.0   # For better visualizations
+
+# Physics and Math
+shapely>=1.8.0    # For geometric operations
+
+# Async support
+aiofiles>=0.8.0

@@ -1,0 +1,1401 @@
+{
+  "zones": {
+    "main_zones": [
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            0,
+            0
+          ],
+          [
+            100,
+            0
+          ],
+          [
+            100,
+            100
+          ],
+          [
+            0,
+            100
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            100,
+            0
+          ],
+          [
+            200,
+            0
+          ],
+          [
+            200,
+            100
+          ],
+          [
+            100,
+            100
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            200,
+            0
+          ],
+          [
+            300,
+            0
+          ],
+          [
+            300,
+            100
+          ],
+          [
+            200,
+            100
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            300,
+            0
+          ],
+          [
+            400,
+            0
+          ],
+          [
+            400,
+            100
+          ],
+          [
+            300,
+            100
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            400,
+            0
+          ],
+          [
+            500,
+            0
+          ],
+          [
+            500,
+            100
+          ],
+          [
+            400,
+            100
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            500,
+            0
+          ],
+          [
+            600,
+            0
+          ],
+          [
+            600,
+            100
+          ],
+          [
+            500,
+            100
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            600,
+            0
+          ],
+          [
+            700,
+            0
+          ],
+          [
+            700,
+            100
+          ],
+          [
+            600,
+            100
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            700,
+            0
+          ],
+          [
+            800,
+            0
+          ],
+          [
+            800,
+            100
+          ],
+          [
+            700,
+            100
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            0,
+            100
+          ],
+          [
+            100,
+            100
+          ],
+          [
+            100,
+            200
+          ],
+          [
+            0,
+            200
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            100,
+            100
+          ],
+          [
+            200,
+            100
+          ],
+          [
+            200,
+            200
+          ],
+          [
+            100,
+            200
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            200,
+            100
+          ],
+          [
+            300,
+            100
+          ],
+          [
+            300,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            300,
+            100
+          ],
+          [
+            400,
+            100
+          ],
+          [
+            400,
+            200
+          ],
+          [
+            300,
+            200
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            400,
+            100
+          ],
+          [
+            500,
+            100
+          ],
+          [
+            500,
+            200
+          ],
+          [
+            400,
+            200
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            500,
+            100
+          ],
+          [
+            600,
+            100
+          ],
+          [
+            600,
+            200
+          ],
+          [
+            500,
+            200
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            600,
+            100
+          ],
+          [
+            700,
+            100
+          ],
+          [
+            700,
+            200
+          ],
+          [
+            600,
+            200
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            700,
+            100
+          ],
+          [
+            800,
+            100
+          ],
+          [
+            800,
+            200
+          ],
+          [
+            700,
+            200
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            0,
+            200
+          ],
+          [
+            100,
+            200
+          ],
+          [
+            100,
+            300
+          ],
+          [
+            0,
+            300
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            100,
+            200
+          ],
+          [
+            200,
+            200
+          ],
+          [
+            200,
+            300
+          ],
+          [
+            100,
+            300
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            200,
+            200
+          ],
+          [
+            300,
+            200
+          ],
+          [
+            300,
+            300
+          ],
+          [
+            200,
+            300
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            300,
+            200
+          ],
+          [
+            400,
+            200
+          ],
+          [
+            400,
+            300
+          ],
+          [
+            300,
+            300
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            400,
+            200
+          ],
+          [
+            500,
+            200
+          ],
+          [
+            500,
+            300
+          ],
+          [
+            400,
+            300
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            500,
+            200
+          ],
+          [
+            600,
+            200
+          ],
+          [
+            600,
+            300
+          ],
+          [
+            500,
+            300
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            600,
+            200
+          ],
+          [
+            700,
+            200
+          ],
+          [
+            700,
+            300
+          ],
+          [
+            600,
+            300
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            700,
+            200
+          ],
+          [
+            800,
+            200
+          ],
+          [
+            800,
+            300
+          ],
+          [
+            700,
+            300
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            0,
+            300
+          ],
+          [
+            100,
+            300
+          ],
+          [
+            100,
+            400
+          ],
+          [
+            0,
+            400
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            100,
+            300
+          ],
+          [
+            200,
+            300
+          ],
+          [
+            200,
+            400
+          ],
+          [
+            100,
+            400
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            200,
+            300
+          ],
+          [
+            300,
+            300
+          ],
+          [
+            300,
+            400
+          ],
+          [
+            200,
+            400
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            300,
+            300
+          ],
+          [
+            400,
+            300
+          ],
+          [
+            400,
+            400
+          ],
+          [
+            300,
+            400
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            400,
+            300
+          ],
+          [
+            500,
+            300
+          ],
+          [
+            500,
+            400
+          ],
+          [
+            400,
+            400
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            500,
+            300
+          ],
+          [
+            600,
+            300
+          ],
+          [
+            600,
+            400
+          ],
+          [
+            500,
+            400
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            600,
+            300
+          ],
+          [
+            700,
+            300
+          ],
+          [
+            700,
+            400
+          ],
+          [
+            600,
+            400
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            700,
+            300
+          ],
+          [
+            800,
+            300
+          ],
+          [
+            800,
+            400
+          ],
+          [
+            700,
+            400
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            0,
+            400
+          ],
+          [
+            100,
+            400
+          ],
+          [
+            100,
+            500
+          ],
+          [
+            0,
+            500
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            100,
+            400
+          ],
+          [
+            200,
+            400
+          ],
+          [
+            200,
+            500
+          ],
+          [
+            100,
+            500
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            200,
+            400
+          ],
+          [
+            300,
+            400
+          ],
+          [
+            300,
+            500
+          ],
+          [
+            200,
+            500
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            300,
+            400
+          ],
+          [
+            400,
+            400
+          ],
+          [
+            400,
+            500
+          ],
+          [
+            300,
+            500
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            400,
+            400
+          ],
+          [
+            500,
+            400
+          ],
+          [
+            500,
+            500
+          ],
+          [
+            400,
+            500
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            500,
+            400
+          ],
+          [
+            600,
+            400
+          ],
+          [
+            600,
+            500
+          ],
+          [
+            500,
+            500
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            600,
+            400
+          ],
+          [
+            700,
+            400
+          ],
+          [
+            700,
+            500
+          ],
+          [
+            600,
+            500
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            700,
+            400
+          ],
+          [
+            800,
+            400
+          ],
+          [
+            800,
+            500
+          ],
+          [
+            700,
+            500
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            0,
+            500
+          ],
+          [
+            100,
+            500
+          ],
+          [
+            100,
+            600
+          ],
+          [
+            0,
+            600
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            100,
+            500
+          ],
+          [
+            200,
+            500
+          ],
+          [
+            200,
+            600
+          ],
+          [
+            100,
+            600
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            200,
+            500
+          ],
+          [
+            300,
+            500
+          ],
+          [
+            300,
+            600
+          ],
+          [
+            200,
+            600
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            300,
+            500
+          ],
+          [
+            400,
+            500
+          ],
+          [
+            400,
+            600
+          ],
+          [
+            300,
+            600
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            400,
+            500
+          ],
+          [
+            500,
+            500
+          ],
+          [
+            500,
+            600
+          ],
+          [
+            400,
+            600
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            500,
+            500
+          ],
+          [
+            600,
+            500
+          ],
+          [
+            600,
+            600
+          ],
+          [
+            500,
+            600
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            600,
+            500
+          ],
+          [
+            700,
+            500
+          ],
+          [
+            700,
+            600
+          ],
+          [
+            600,
+            600
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      },
+      {
+        "type": "yard",
+        "polygon": [
+          [
+            700,
+            500
+          ],
+          [
+            800,
+            500
+          ],
+          [
+            800,
+            600
+          ],
+          [
+            700,
+            600
+          ]
+        ],
+        "area": 10000,
+        "speed_limit": 10,
+        "max_speed": 30,
+        "description": "Yard area - 10 km/h base speed"
+      }
+    ],
+    "subzones": {
+      "sidewalks": [
+        {
+          "type": "sidewalk",
+          "polygon": [
+            [
+              246,
+              165
+            ],
+            [
+              245,
+              166
+            ],
+            [
+              245,
+              181
+            ],
+            [
+              246,
+              182
+            ],
+            [
+              246,
+              183
+            ],
+            [
+              247,
+              184
+            ],
+            [
+              248,
+              184
+            ],
+            [
+              249,
+              185
+            ],
+            [
+              264,
+              185
+            ],
+            [
+              265,
+              184
+            ],
+            [
+              265,
+              170
+            ],
+            [
+              264,
+              170
+            ],
+            [
+              260,
+              166
+            ],
+            [
+              260,
+              165
+            ]
+          ],
+          "area": 375.5,
+          "description": "Sidewalk/Pedestrian area"
+        },
+        {
+          "type": "sidewalk",
+          "polygon": [
+            [
+              245,
+              100
+            ],
+            [
+              245,
+              114
+            ],
+            [
+              246,
+              115
+            ],
+            [
+              260,
+              115
+            ],
+            [
+              260,
+              100
+            ]
+          ],
+          "area": 224.5,
+          "description": "Sidewalk/Pedestrian area"
+        }
+      ],
+      "parking": [],
+      "roads": []
+    }
+  },
+  "roads": {
+    "network": [
+      {
+        "id": 0,
+        "points": [
+          [
+            253,
+            172
+          ],
+          [
+            253,
+            173
+          ],
+          [
+            253,
+            174
+          ],
+          [
+            254,
+            175
+          ],
+          [
+            255,
+            176
+          ],
+          [
+            256,
+            177
+          ],
+          [
+            257,
+            177
+          ]
+        ],
+        "length": 7.242640687119285,
+        "width": 5.599999904632568,
+        "lanes": 1,
+        "type": "minor_road",
+        "direction": "two-way",
+        "start_point": [
+          253,
+          172
+        ],
+        "end_point": [
+          257,
+          177
+        ]
+      }
+    ],
+    "lanes": [
+      {
+        "id": 0,
+        "road_id": 0,
+        "centerline": [
+          [
+            253,
+            172
+          ],
+          [
+            253,
+            173
+          ],
+          [
+            253,
+            174
+          ],
+          [
+            254,
+            175
+          ],
+          [
+            255,
+            176
+          ],
+          [
+            256,
+            177
+          ],
+          [
+            257,
+            177
+          ]
+        ],
+        "width": 5.599999904632568,
+        "direction": "two-way"
+      }
+    ],
+    "intersections": [],
+    "crosswalks": []
+  },
+  "map_bounds": {
+    "width": 800,
+    "height": 600
+  },
+  "metadata": {
+    "theme": "light",
+    "scale_factor": 1.0,
+    "source_file": null
+  }
+}

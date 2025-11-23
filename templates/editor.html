@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Editor - Autonomous Taxi Simulation</title>
+    <link rel="stylesheet" href="/static/css/blueprint.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="blueprint-bg">
+    <div class="app-container">
+        <!-- Top Toolbar -->
+        <div class="top-toolbar">
+            <div class="toolbar-section">
+                <div class="app-title">Map Editor</div>
+            </div>
+            <div class="toolbar-section">
+                <button class="blueprint-btn" onclick="window.location.href='/'">Back to Main</button>
+                <button class="blueprint-btn primary" onclick="saveMapEdits()">Save Map</button>
+                <button class="blueprint-btn warning" onclick="undoEdit()">Undo</button>
+                <button class="blueprint-btn danger" onclick="clearEdits()">Clear All</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Sidebar - Tools -->
+            <div class="sidebar">
+                <!-- Tool Palette -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Tools</div>
+                        </div>
+                        <div class="tool-palette mt-md">
+                            <button class="tool-btn active" data-tool="select" onclick="selectTool('select')">
+                                <div class="tool-icon">⊙</div>
+                                <div>Select</div>
+                            </button>
+                            <button class="tool-btn" data-tool="zone" onclick="selectTool('zone')">
+                                <div class="tool-icon">▢</div>
+                                <div>Zone</div>
+                            </button>
+                            <button class="tool-btn" data-tool="road" onclick="selectTool('road')">
+                                <div class="tool-icon">═</div>
+                                <div>Road</div>
+                            </button>
+                            <button class="tool-btn" data-tool="polygon" onclick="selectTool('polygon')">
+                                <div class="tool-icon">⬡</div>
+                                <div>Polygon</div>
+                            </button>
+                            <button class="tool-btn" data-tool="sidewalk" onclick="selectTool('sidewalk')">
+                                <div class="tool-icon">⫿</div>
+                                <div>Sidewalk</div>
+                            </button>
+                            <button class="tool-btn" data-tool="parking" onclick="selectTool('parking')">
+                                <div class="tool-icon">P</div>
+                                <div>Parking</div>
+                            </button>
+                            <button class="tool-btn" data-tool="intersection" onclick="selectTool('intersection')">
+                                <div class="tool-icon">✛</div>
+                                <div>Intersect</div>
+                            </button>
+                            <button class="tool-btn" data-tool="crosswalk" onclick="selectTool('crosswalk')">
+                                <div class="tool-icon">╬</div>
+                                <div>Crosswalk</div>
+                            </button>
+                            <button class="tool-btn" data-tool="delete" onclick="selectTool('delete')">
+                                <div class="tool-icon">✕</div>
+                                <div>Delete</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zone Properties -->
+                <div class="sidebar-section" id="zoneProperties" style="display: none;">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Zone Properties</div>
+                        </div>
+                        <div class="control-panel mt-md">
+                            <div class="control-group">
+                                <label class="blueprint-label">Zone Type</label>
+                                <select class="blueprint-select" id="zoneType">
+                                    <option value="prohibited">Prohibited</option>
+                                    <option value="yard">Yard</option>
+                                    <option value="urban">Urban</option>
+                                    <option value="countryside">Countryside</option>
+                                    <option value="highway">Highway</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label class="blueprint-label">Zone Name</label>
+                                <input type="text" class="blueprint-input" id="zoneName" placeholder="Enter name...">
+                            </div>
+                            <button class="blueprint-btn primary" onclick="applyZoneProperties()">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Road Properties -->
+                <div class="sidebar-section" id="roadProperties" style="display: none;">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Road Properties</div>
+                        </div>
+                        <div class="control-panel mt-md">
+                            <div class="control-group">
+                                <label class="blueprint-label">Road Width (px)</label>
+                                <input type="number" class="blueprint-input" id="roadWidth" value="20" min="5" max="100">
+                            </div>
+                            <div class="control-group">
+                                <label class="blueprint-label">Direction</label>
+                                <select class="blueprint-select" id="roadDirection">
+                                    <option value="two-way">Two-Way</option>
+                                    <option value="one-way">One-Way</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label class="blueprint-label">Speed Limit (km/h)</label>
+                                <input type="number" class="blueprint-input" id="speedLimit" value="50" min="10" max="120" step="10">
+                            </div>
+                            <button class="blueprint-btn primary" onclick="applyRoadProperties()">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drawing Instructions -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Instructions</div>
+                        </div>
+                        <div class="mt-md" style="font-size: 11px; color: var(--blueprint-text-dim); line-height: 1.5;">
+                            <p id="toolInstructions">
+                                <strong>Select Tool:</strong><br>
+                                Click on elements to select and edit them.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layer Toggles -->
+                <div class="sidebar-section">
+                    <div class="blueprint-panel">
+                        <div class="blueprint-panel-header">
+                            <div class="blueprint-panel-title">Layers</div>
+                        </div>
+                        <ul class="layer-list mt-md">
+                            <li class="layer-item active">
+                                <span class="layer-name">Zones</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" checked onchange="toggleEditorLayer('zones', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li class="layer-item active">
+                                <span class="layer-name">Roads</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" checked onchange="toggleEditorLayer('roads', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li class="layer-item active">
+                                <span class="layer-name">Subzones</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" checked onchange="toggleEditorLayer('subzones', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li class="layer-item active">
+                                <span class="layer-name">Grid</span>
+                                <label class="blueprint-toggle">
+                                    <input type="checkbox" checked onchange="toggleEditorLayer('grid', this.checked)">
+                                    <span class="blueprint-toggle-slider"></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas Area -->
+            <div class="canvas-area">
+                <canvas id="editor-canvas"></canvas>
+
+                <!-- Zoom Controls -->
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="editorZoomIn()">+</button>
+                    <div class="zoom-level" id="editorZoomLevel">100%</div>
+                    <button class="zoom-btn" onclick="editorZoomOut()">-</button>
+                    <button class="zoom-btn" onclick="editorResetZoom()" title="Reset Zoom">⊙</button>
+                </div>
+
+                <!-- Technical Grid Overlay -->
+                <div class="technical-grid"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Status Bar -->
+        <div class="status-bar">
+            <div class="status-section">
+                <div class="status-item">
+                    <div class="status-indicator" id="editorStatus"></div>
+                    <span id="editorStatusText">Ready</span>
+                </div>
+                <div class="status-item">
+                    <span>Tool:</span>
+                    <span id="currentTool">Select</span>
+                </div>
+            </div>
+            <div class="status-section">
+                <div class="status-item">
+                    <span>Mouse:</span>
+                    <span id="editorMousePos">0, 0</span>
+                </div>
+                <div class="status-item">
+                    <span>Zones:</span>
+                    <span id="editorZoneCount">0</span>
+                </div>
+                <div class="status-item">
+                    <span>Roads:</span>
+                    <span id="editorRoadCount">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="/static/js/map_viewer.js"></script>
+    <script src="/static/js/editor.js"></script>
+</body>
+</html>

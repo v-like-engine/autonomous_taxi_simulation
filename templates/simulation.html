@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation View - Autonomous Taxi</title>
+    <link rel="stylesheet" href="/static/css/blueprint.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="blueprint-bg">
+    <div class="app-container">
+        <!-- Top Toolbar -->
+        <div class="top-toolbar">
+            <div class="toolbar-section">
+                <div class="app-title">Simulation View</div>
+            </div>
+            <div class="toolbar-section">
+                <button class="blueprint-btn" onclick="window.location.href='/'">Back to Main</button>
+                <button class="blueprint-btn success" id="simStartBtn" onclick="startSimulation()">Start</button>
+                <button class="blueprint-btn warning" id="simPauseBtn" onclick="pauseSimulation()">Pause</button>
+                <button class="blueprint-btn danger" id="simResetBtn" onclick="resetSimulation()">Reset</button>
+            </div>
+        </div>
+
+        <!-- Main Content - Full Screen Canvas -->
+        <div class="main-content">
+            <div class="canvas-area" style="flex: 1;">
+                <canvas id="simulation-canvas"></canvas>
+
+                <!-- Zoom Controls -->
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="zoomIn()">+</button>
+                    <div class="zoom-level" id="simZoomLevel">100%</div>
+                    <button class="zoom-btn" onclick="zoomOut()">-</button>
+                    <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">⊙</button>
+                </div>
+
+                <!-- Floating Stats Panel -->
+                <div class="floating-panel" id="statsPanel" style="top: 20px; left: 20px;">
+                    <div class="floating-panel-header">
+                        <div class="floating-panel-title">Simulation Stats</div>
+                        <div class="floating-panel-controls">
+                            <button class="panel-control-btn" onclick="togglePanel('statsPanel')">_</button>
+                        </div>
+                    </div>
+                    <div class="floating-panel-content">
+                        <div class="blueprint-stat">
+                            <span class="blueprint-stat-label">FPS:</span>
+                            <span class="blueprint-stat-value" id="simFps">60</span>
+                        </div>
+                        <div class="blueprint-stat">
+                            <span class="blueprint-stat-label">Vehicles:</span>
+                            <span class="blueprint-stat-value" id="simVehicleCount">0</span>
+                        </div>
+                        <div class="blueprint-stat">
+                            <span class="blueprint-stat-label">Pedestrians:</span>
+                            <span class="blueprint-stat-value" id="simPedestrianCount">0</span>
+                        </div>
+                        <div class="blueprint-stat">
+                            <span class="blueprint-stat-label">Time:</span>
+                            <span class="blueprint-stat-value" id="simTimeDisplay">00:00</span>
+                        </div>
+                        <div class="blueprint-stat">
+                            <span class="blueprint-stat-label">Speed:</span>
+                            <span class="blueprint-stat-value" id="simSpeedDisplay">1.0x</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Main Car Panel -->
+                <div class="floating-panel" id="carPanel" style="top: 20px; right: 20px;">
+                    <div class="floating-panel-header">
+                        <div class="floating-panel-title">Main Vehicle</div>
+                        <div class="floating-panel-controls">
+                            <button class="panel-control-btn" onclick="togglePanel('carPanel')">_</button>
+                        </div>
+                    </div>
+                    <div class="floating-panel-content">
+                        <div class="blueprint-stat">
+                            <span class="blueprint-stat-label">Speed:</span>
+                            <span class="blueprint-stat-value" id="simCarSpeed">0 km/h</span>
+                        </div>
+                        <div class="blueprint-stat">
+                            <span class="blueprint-stat-label">Position:</span>
+                            <span class="blueprint-stat-value" id="simCarPosition">-, -</span>
+                        </div>
+                        <div class="blueprint-stat">
+                            <span class="blueprint-stat-label">Zone:</span>
+                            <span class="blueprint-stat-value" id="simCarZone">-</span>
+                        </div>
+                        <div class="blueprint-stat">
+                            <span class="blueprint-stat-label">Route:</span>
+                            <span class="blueprint-stat-value" id="simRouteProgress">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Controls Panel -->
+                <div class="floating-panel" id="controlsPanel" style="bottom: 20px; left: 20px; min-width: 300px;">
+                    <div class="floating-panel-header">
+                        <div class="floating-panel-title">Quick Controls</div>
+                        <div class="floating-panel-controls">
+                            <button class="panel-control-btn" onclick="togglePanel('controlsPanel')">_</button>
+                        </div>
+                    </div>
+                    <div class="floating-panel-content">
+                        <div class="control-group">
+                            <label class="blueprint-label">Speed</label>
+                            <div class="control-row">
+                                <div class="slider-container">
+                                    <input type="range" class="blueprint-slider" id="simSpeedSlider"
+                                           min="0.1" max="5" step="0.1" value="1.0"
+                                           oninput="updateSimSpeed(this.value)">
+                                </div>
+                                <span class="slider-value" id="simSpeedValue">1.0x</span>
+                            </div>
+                        </div>
+                        <div class="blueprint-divider"></div>
+                        <div style="display: flex; gap: 8px;">
+                            <label class="blueprint-toggle">
+                                <input type="checkbox" checked onchange="toggleSimLayer('zones', this.checked)">
+                                <span class="blueprint-toggle-slider"></span>
+                            </label>
+                            <span style="font-size: 11px;">Show Zones</span>
+                        </div>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <label class="blueprint-toggle">
+                                <input type="checkbox" checked onchange="toggleSimLayer('paths', this.checked)">
+                                <span class="blueprint-toggle-slider"></span>
+                            </label>
+                            <span style="font-size: 11px;">Show Paths</span>
+                        </div>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <label class="blueprint-toggle">
+                                <input type="checkbox" onchange="toggleSimLayer('sensors', this.checked)">
+                                <span class="blueprint-toggle-slider"></span>
+                            </label>
+                            <span style="font-size: 11px;">Show Sensors</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Grid Overlay -->
+                <div class="technical-grid"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Status Bar -->
+        <div class="status-bar">
+            <div class="status-section">
+                <div class="status-item">
+                    <div class="status-indicator" id="simStatusIndicator"></div>
+                    <span id="simStatusText">Ready</span>
+                </div>
+            </div>
+            <div class="status-section">
+                <div class="status-item">
+                    <span>Mouse:</span>
+                    <span id="simMousePos">0, 0</span>
+                </div>
+                <div class="status-item">
+                    <span>Zoom:</span>
+                    <span id="simZoomStatus">100%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="/static/js/map_viewer.js"></script>
+    <script src="/static/js/animation.js"></script>
+    <script src="/static/js/controls.js"></script>
+    <script src="/static/js/main.js"></script>
+
+    <script>
+        // Make panels draggable
+        document.addEventListener('DOMContentLoaded', function() {
+            makePanelDraggable('statsPanel');
+            makePanelDraggable('carPanel');
+            makePanelDraggable('controlsPanel');
+        });
+
+        function makePanelDraggable(panelId) {
+            const panel = document.getElementById(panelId);
+            const header = panel.querySelector('.floating-panel-header');
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+
+            header.addEventListener('mousedown', function(e) {
+                if (e.target.classList.contains('panel-control-btn')) return;
+                isDragging = true;
+                initialX = e.clientX - panel.offsetLeft;
+                initialY = e.clientY - panel.offsetTop;
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                    panel.style.left = currentX + 'px';
+                    panel.style.top = currentY + 'px';
+                    panel.style.right = 'auto';
+                    panel.style.bottom = 'auto';
+                }
+            });
+
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+            });
+        }
+
+        function togglePanel(panelId) {
+            const panel = document.getElementById(panelId);
+            panel.classList.toggle('collapsed');
+        }
+    </script>
+</body>
+</html>

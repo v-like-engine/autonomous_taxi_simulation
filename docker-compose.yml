@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  autonomous-taxi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: autonomous_taxi_simulation
+    ports:
+      - "5000:5000"
+    volumes:
+      # Mount directories for persistent data
+      - ./maps:/app/maps
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./data:/app/data
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=0
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    networks:
+      - taxi-network
+
+networks:
+  taxi-network:
+    driver: bridge
+
+# Optional: Add volumes for persistent storage
+volumes:
+  maps-data:
+  models-data:
+  logs-data:

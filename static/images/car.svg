@@ -1,0 +1,15 @@
+<svg width="50" height="30" viewBox="0 0 50 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Car body -->
+  <rect x="5" y="5" width="40" height="20" rx="3" fill="#4A90E2" stroke="black" stroke-width="1"/>
+  <!-- Windshield -->
+  <rect x="15" y="8" width="10" height="6" fill="#87CEEB" opacity="0.6"/>
+  <!-- Rear window -->
+  <rect x="28" y="8" width="10" height="6" fill="#87CEEB" opacity="0.6"/>
+  <!-- Wheels -->
+  <circle cx="12" cy="5" r="3" fill="#333"/>
+  <circle cx="38" cy="5" r="3" fill="#333"/>
+  <circle cx="12" cy="25" r="3" fill="#333"/>
+  <circle cx="38" cy="25" r="3" fill="#333"/>
+  <!-- Direction indicator (front) -->
+  <polygon points="2,15 5,12 5,18" fill="#FFD700"/>
+</svg>
